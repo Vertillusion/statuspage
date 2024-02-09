@@ -1,10 +1,10 @@
 {
-    "config_title": "Vertillusion Network 状态监控", 
-    "config_title_english": "Status",
+    "config_title": "状态监控", 
+    "config_title_english": "StatusLive",
 
     "config_mode": 2,
     "config_readonly_apikey": "USE_SERVER_APIKEY",
-    "config_proxy_link": "https://api.vertillusion.com/status/core.php",
+    "config_proxy_link": "https://statuslive.freejishu.com/core/?publickey=857399d7-918c-79b4-e2dc-9fabd757fe8b",
     "config_history_time": 60,
     "config_logs_history_days": 30,
 
