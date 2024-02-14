@@ -1,6 +1,6 @@
 {
     "config_title": "状态监控", 
-    "config_title_english": "Vertillusion Network",
+    "config_title_english": "StatusLive",
 
     "config_mode": 2,
     "config_readonly_apikey": "USE_SERVER_APIKEY",
