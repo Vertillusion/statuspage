@@ -1,0 +1,24 @@
+name: Status-Vercel
+
+on:
+  push:
+    branches: [ "source"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 12  # 根据你的项目需要选择适当的 Node.js 版本
+    - name: Install dependencies
+      run: npm install
+    - name: Build
+      run: npm run build
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@4.1.0
+      with:
+        folder: dist
+        branch: public  
