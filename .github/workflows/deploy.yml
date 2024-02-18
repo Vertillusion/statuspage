@@ -14,9 +14,12 @@ jobs:
       with:
         node-version: 12  # 根据你的项目需要选择适当的 Node.js 版本
     - name: Install dependencies
-      run: npm install
+      run: |
+        npm install yarn -g
+        yarn config set "strict-ssl" false -g
+        yarn
     - name: Build
-      run: npm run build
+      run: yarn build
     - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@4.1.0
       with:
