@@ -86,9 +86,42 @@
         </el-table>
       </el-card>
 
+      <el-card shadow="always" class="all-status-card" v-loading="table_loading">
+        <!-- 服务 -->
+        <h4 class="card-title">服务<span style="font-size:1rem">&nbsp;Service</span></h4>
+        
+
+        <el-table :data="this.service_table" style="width: 100%;" @cell-click="table_click">
+          <el-table-column label="状态" width="50" min-width="40">
+            <template slot-scope="scope">
+              <div v-html="scope.row.status_html" @click="show_respontime(scope.row)"></div>
+            </template>
+          </el-table-column>
+
+          <el-table-column label="可用率" width="90" min-width="70">
+            <template slot-scope="scope">
+              <b><span v-bind:class="scope.row.custom_uptime_ratio_class" @click="show_respontime(scope.row)">{{scope.row.custom_uptime_ratio}}%</span></b>
+            </template>
+          </el-table-column>
+
+          <el-table-column label="名称" width="110" min-width="70">
+            <template slot-scope="scope">
+              <b><div v-html="scope.row.friendly_name"  @click="show_respontime(scope.row)"></div></b>
+            </template>
+          </el-table-column>
+
+          <el-table-column :label="'详细可用率（过去'+json.config_history_time+'天）'" min-width="670">
+            <template slot-scope="scope">
+              <el-tooltip class="" effect="dark" :content="range.time + ' ' + range.range + '%'" placement="top" v-for="range in scope.row.custom_uptime_ranges_a" :key="range.key">
+                <span class="square" v-bind:class="[range.info ==1 ? 'info-bg' : (range.range > json.config_success_min ? 'success-bg' : (range.range > json.config_warning_min ? 'warning-bg' : 'danger-bg'))]"></span>
+              </el-tooltip>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-card>
 
       <el-card shadow="always" class="all-status-card" v-loading="table_loading">
-        <!-- 数据中心 -->
+        <!-- 网站 -->
         <h4 class="card-title">网站<span style="font-size:1rem">&nbsp;WebSite</span></h4>
         
 
@@ -159,9 +192,11 @@
       </el-card>      
     </el-main>
     <el-footer>
-      
+      <p>
+      © Copyright 2019-2024, <a href="https://www.vertillusion.com">Vertillusion Studio</a> - Meet, Inspire, Create.<br>
+      Powered by UptimeRobot.Project repository:<a href="https://github.com/freejishu/StatusLive">freejishu/StatusLive</a>
+      </p>
       <!--<el-button>默认按钮</el-button>-->
-      
     </el-footer>
   </el-container>
 </template>
@@ -320,6 +355,7 @@ export default {
       json: [],
       website_table: [],
       datacenter_table: [],
+      service_table: [],
       success: 0,
       danger: 0,
       info: 0,
@@ -510,6 +546,7 @@ export default {
       this.info = 0;
       this.website_table=[];
       this.datacenter_table=[];
+      this.service_table=[];
       for (let index = 0; index < json_up.monitors.length; index++) {
         //当前状态
         if(json_up.monitors[index].status < 2){
@@ -551,6 +588,9 @@ export default {
         }else if(json_up.monitors[index].type == 3){
           //Ping检测归位
           this.datacenter_table.push(json_up.monitors[index])
+        }else{
+          //Port检测归位
+          this.service_table.push(json_up.monitors[index])
         }
 
         //处理日志
@@ -575,6 +615,7 @@ export default {
     
       //console.log(this.datacenter_table);
       //console.log(this.website_table);
+      //console.log(this.service_table);
       //确定最终提示
       if(this.danger>0){
         if(this.danger>=this.success){
