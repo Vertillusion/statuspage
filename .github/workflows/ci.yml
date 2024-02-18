@@ -23,6 +23,7 @@ jobs:
     - name: Install
       run: |
         npm install yarn -g
+        yarn config set "strict-ssl" false -g
         yarn
     - name: Clone deploy branch
       run: |
