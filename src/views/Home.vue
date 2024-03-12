@@ -438,9 +438,10 @@ export default {
           console.log(error);
           this.$notify.error({
             title: '出现异常',
-            message: '连接服务器失败，请刷新页面尝试恢复。',
+            message: '连接服务器失败，即将跳转外部监控页面。',
             type: 'danger'
           });
+          window.location.href='https://stats.uptimerobot.com/BEv2zUPvvN';
 
       });
       }
@@ -502,10 +503,10 @@ export default {
           }else{
             this.$notify.error({
               title: '出现异常',
-              message: '请求参数异常。连续三次连接服务器失败，请检查您的网络（或配置），并刷新页面重试。',
+              message: '请求参数异常。连续三次连接服务器失败，即将跳转外部监控页面。',
             });
             this.icon_loading = false; 
-
+            window.location.href='https://stats.uptimerobot.com/BEv2zUPvvN';
           }
         }else{
           this.refresh_status(response.data);
@@ -527,9 +528,10 @@ export default {
           }else{
             this.$notify.error({
               title: '出现异常',
-              message: '连接服务器失败。连续三次连接服务器失败，请检查您的网络（或配置），并刷新页面重试。',
+              message: '连接服务器失败。连续三次连接服务器失败，即将跳转外部监控页面。',
             });
             this.icon_loading = false; 
+            window.location.href='https://stats.uptimerobot.com/BEv2zUPvvN';
           }
 
       });
