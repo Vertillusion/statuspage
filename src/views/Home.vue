@@ -6,7 +6,8 @@
         &nbsp;&nbsp;
         <span style="font-size:1.7rem" id="title-small">{{this.main_title_eng}}</span>
       </h2>
-      <h4 class="title" style="margin-top:10px;">报告生成时间：<span>{{time_text}}</span>&nbsp;&nbsp;<span v-if="json.config_auto_refresh_seconds > 0" ><i class="el-icon-refresh" v-bind:class="{ 'loading-icon': icon_loading }"></i>{{counter}}s</span></h4>
+      <h4 class="title" style="margin-top:10px;"><a href="https://stats.uptimerobot.com/BEv2zUPvvN">点此跳转外部监控页面</a> 报告生成时间：<span>{{time_text}}</span>&nbsp;&nbsp;<span v-if="json.config_auto_refresh_seconds > 0" ><i class="el-icon-refresh" v-bind:class="{ 'loading-icon': icon_loading }"></i>{{counter}}s</span></h4>
+
     </el-header>
     <el-main class="style-main" >
       <el-alert :title="alert_title" :type="alert_type" :description="alert_description" show-icon :closable="false" :center="false" style=" text-align: left;"></el-alert>
